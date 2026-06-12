@@ -136,8 +136,8 @@ function showAsset(a) {
 
     <hr>
 
-    <button class="btn" onclick="window.open('https://script.google.com/macros/s/AKfycbxx6QUnczSLTTsv0KT5hNWhTgf0CzCii7G5KHGyXsRdXrmnkuLm2E1aNVU_AcJEqryXOA/exec?page=complaint&asset=${a.Asset_No}','_blank')"> Report Breakdown</button>
-    <button class="btn" onclick="window.open('https://script.google.com/macros/s/AKfycbxx6QUnczSLTTsv0KT5hNWhTgf0CzCii7G5KHGyXsRdXrmnkuLm2E1aNVU_AcJEqryXOA/exec?page=close&asset=${a.Asset_No}','_blank')"> Close Breakdown</button>
+    <button class="btn" onclick="window.open('https://script.google.com/macros/s/AKfycbw2uUEh7cdKZcZEJJ1BF2Fb9kVTxvkI4LgtNz5gwExfp02eUrERevpRXDbnBaR7KSz3vQ/exec?page=complaint&asset=${a.Asset_No}','_blank')"> Report Breakdown</button>
+    <button class="btn" onclick="window.open('https://script.google.com/macros/s/AKfycbw2uUEh7cdKZcZEJJ1BF2Fb9kVTxvkI4LgtNz5gwExfp02eUrERevpRXDbnBaR7KSz3vQ/exec?page=close&asset=${a.Asset_No}','_blank')"> Close Breakdown</button>
 
   `;
   assetCard.style.display = "block";
@@ -150,6 +150,7 @@ Html5Qrcode.getCameras().then(cams => {
   const cam = cams.find(c => c.label.toLowerCase().includes("back")) || cams[0];
   qr.start(cam.id, { fps: 15, qrbox: { width: 280, height: 280 } }, txt => {
     qr.stop();
+    fetch(SHEET_URL)
       .then(res => res.json())
       .then(data => {
         const asset = data.find(a => a.Asset_No === txt.trim());
@@ -162,24 +163,6 @@ Html5Qrcode.getCameras().then(cams => {
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
